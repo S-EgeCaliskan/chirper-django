@@ -1,0 +1,24 @@
+{% extends 'chirper/base.html' %}
+{% block title %}<title>Chirper | {{poster}} </title>{% endblock title %}
+
+{% block content %}
+    <div class='container text-center mt-3'>
+        <p>{{poster}}'s Profile</p>
+        <p>Here is what {{poster}} has been chirping about:</p>
+    </div>
+    <div class='container mt-3'>
+        <ul class='list-group'>
+            {% for post in posts %}
+                <li style="background-color: #DDD0C8;" class='list-group-item mt-2'>{{post}} &raquo; posted by <a href="{% url 'chirper:profile' post.poster %}">{{post.poster}}</a> - {{post.date_added|date:'M d y, H:i'}}.
+                    {% if post.poster == request.user %} |
+                    <a class='link-success' href="{% url 'chirper:edit_post' post.id %}">Edit chirp</a>
+                    {% endif %}
+                </li>
+            {% empty %}
+                    <p>Looks like {{poster}} has said nothing yet. </p>
+            {% endfor %}
+            </ul>
+        </div>
+{% endblock content %}
+
+

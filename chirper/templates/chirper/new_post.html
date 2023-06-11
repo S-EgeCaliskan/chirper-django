@@ -1,0 +1,18 @@
+{% extends 'chirper/base.html' %}
+{% load django_bootstrap5 %}
+{% block title %}<title>Chirper | New Post</title>{% endblock title %}
+
+{% block content %}
+    <div class='container text-center mt-5'>
+        <div class='row justify-content-md-center'>
+            <div class="col-lg-4">
+                <p>Share your feelings!</p>
+                <form class="body-center" action="{% url 'chirper:new_post' %}" method='post'>
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% bootstrap_button button_type="submit" content="Send chirp" %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

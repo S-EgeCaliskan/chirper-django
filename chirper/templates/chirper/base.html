@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}<title>Chirper</title>{% endblock title %}
+    {% load django_bootstrap5 %}
+    {% bootstrap_css%}
+    {% bootstrap_javascript%}
+</head>
+<body style="background-color: #F8F8F9;">
+<div class='container sticky-top'>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #FAF5E9;">
+        <div class="container-fluid">
+            <a class="navbar-brand mb-0 h1" href="{% url 'chirper:index' %}">Chirper</a>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <!--highlighting the active url page based on its name as they stand in urls.py-->
+                {% with request.resolver_match.url_name as url_name %}
+                    <li class='nav-item'>
+                        <a class="nav-link {% if url_name == 'index' %} active" aria-current='page '{% endif %}  "href="{% url 'chirper:index' %}"">Home</a>
+                    </li>        
+                    {% if user.is_authenticated %}
+                        <li class='nav-item navbar-text'>
+                            <span>Welcome, <a href="{% url 'chirper:profile' user.username %}">{{user.username}}!</a> - 
+                            <a href="{% url 'accounts:logout' %}">Logout</a>
+                        </li>
+                    {%else%}
+                        <li class='nav-item'>
+                            <a class="nav-link {% if url_name == 'login' %} active" aria-current='page' {% endif %} "href="{% url 'accounts:login' %}"">Login</a>
+                        </li>
+                        <li class='nav-item'>
+                            <a class="nav-link {% if url_name == 'register' %} active" aria-current='page' {% endif %} "href="{% url 'accounts:register' %}"">Register</a>
+                        </li>
+                    {% endif %}
+                {% endwith %}
+            </ul>
+        </div>
+    </nav>
+</div>
+
+{% block content %}
+{% endblock content %}
+
+</body>
+</html>
+

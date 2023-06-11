@@ -1,0 +1,56 @@
+{% extends 'chirper/base.html' %}
+
+
+{% block content %}
+    <div class='container text-center mt-3'>
+        {% if user.is_authenticated %}
+        {%else%}
+            <p>Welcome to Chirper.</p>
+        {% endif %}
+            <h3>Chirps</h3> {% if user.is_authenticated %} <a href="{% url 'chirper:new_post' %}">Make a new Chirp</a> {% endif %}
+    </div>
+        <div class='container mt-3'>
+            <ul class='list-group'>
+                {% for post in page_obj %}
+                    <li style="background-color: #DDD0C8;" class='list-group-item mt-2'>{{post}} &raquo; posted by <a href="{% url 'chirper:profile' post.poster %}">{{post.poster}}</a> - {{post.date_added|date:'M d y, H:i'}}.
+                        {% if post.poster == request.user %} |
+                        <a class='link-success' href="{% url 'chirper:edit_post' post.id %}">Edit chirp</a>
+                        {% endif %} |
+                        <a class='link-success' href="{% url 'chirper:reply' post.id%}">Reply</a>
+                    </li>
+                {% empty %}
+                    <p>No one has chirped yet.</p>
+            {% endfor %}
+                <!--paginator-->
+                <div class='container mt-2'>
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                                {% if page_obj.has_previous %}
+                                    <a class="page-link" href="?page=1">&laquo; First</a>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number}}">Previous</a>
+                                {% endif %}
+                            </li>
+                            {% if page_obj.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">{{page_obj.previous_page_number }}</a>
+                                </li>
+                            {% endif %}
+                                <li class="page-item"><a class="page-link" href="?page={{page_obj.number}}">{{ page_obj.number }}</a></li>
+                            {% if page_obj.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">{{page_obj.next_page_number}}</a></li>
+                            {% endif %}
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                </div>
+                <!--paginator end-->
+            </ul>
+        </div>
+    </div>
+{% endblock content %}
