@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+*{
+  margin: 0;
+  font-family: "Quicksand";
+  color: #003b35;
+}
+
+.container h2{
+  padding: 10px 10px;
+  font-size: 18px;
+}
+
+.container #new-chirp{
+  border: 1px solid (228, 228, 228);
+  background-color: (228, 228, 228);
+  padding: 10px;
+  color: rgb(88, 88, 88);;
+}
+
+
+.container #new-chirp:hover{
+  box-shadow: 1px 1px  5px #003b35;
+  color: white;
+  background-color: rgb(88, 88, 88);;
+  font-size: 17px;
+  margin: 20px 20px;
+  display: inline;
+  font-weight: bold;
+}
+
+.list-group-item{
+  background-color:rgb(228, 228, 228) ;
+}
+
+.list-group-item:hover{
+  background-color: beige;
+}
+
+.list-group-item #reply{
+  font-style: italic;
+}
+
+
+li #user-name:hover, .link-success:hover {
+  font-weight: bold;
+  font-size: 16px
+}
+
+#post-secondary-content{
+  font-size: 15px;
+}
+
+.navbar, .list-group{
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.navbar{
+  background-color: #F8F8F9;
+}
+
+.navbar-expand-lg{
+  border: 5px 5px 5px solid #003b35;
+}
+
+.navbar-nav {
+  font-weight: 500;
+}
+
+.navbar span{
+  position: relative;
+  transition: transform 250ms;
+}
+
+.navbar span:hover{
+  background-color: rgb(88, 88, 88);;
+  border-radius: 30%;
+  padding: 5px;
+  color: rgb(255, 255, 255);
+}
+
+*::selection{
+  background-color: rgb(88, 88, 88);
+  color: white;
+}
+
+#user-form{
+  max-width: 250px;
+  margin: 0 auto;
+}
+
+.text-center #original-post {
+  padding-top: 20px;
+}
+
+.text-center #reply-list, .text-center #original-post{
+  margin: 0 auto;
+  max-width: 1000px;
+}
+#reply-list{
+  padding-top: 50px;
+}
+
+.col #replies{
+  word-wrap:break-word;
+  padding-top: 5px;
+}

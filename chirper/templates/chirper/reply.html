@@ -6,14 +6,14 @@
 
 
 <div class="container text-center mt-4">
-    <div class="card">
+    <div class="card" id='original-post'>
         <p> Original Post</p>{{post}}  <i>posted by {{post.poster}}</i> on {{post.date_added}}
     </div>
-    <div class="row align-items-center mt-2">
-        <p><strong>Previous replies:</strong></p>
-        <div class="col border border-dark" style="background-color: #DDD0C8;">
+    <div class="row align-items-center mt-2" id="reply-list">
+        <p>Previous replies:</p>
+        <div class="col border border-dark">
         {% for reply in replies  %}
-                {{reply}} - <i>{{reply.replier}}</i> <br/>
+                <span id='replies'>{{reply}} - <a href="{% url 'chirper:profile' post.poster %}"></span><i>{{reply.replier}}</i></a><br/>
             {%empty%}
             <p>No replies here!</p>
             {% endfor %}
@@ -22,13 +22,15 @@
 </div>
 
 <div class='container text-center mt-5'>
-    <div class='row justify-content-md-center'>
+    <div class="card">
+        <div class='row justify-content-md-center'>
         <div class="col-lg-4">
             <form class="body-center" action="{% url 'chirper:reply' post.id %}" method='post'>
                 {% csrf_token %}
                 {% bootstrap_form form %}
                 {% bootstrap_button button_type="submit" content="Reply" %}
             </form>
+            </div>
         </div>
     </div>
 </div>

@@ -1,22 +1,24 @@
 {% extends 'chirper/base.html' %}
 
-
 {% block content %}
     <div class='container text-center mt-3'>
         {% if user.is_authenticated %}
         {%else%}
-            <p>Welcome to Chirper.</p>
+            <h2>Welcome to Chirper.</h2>
         {% endif %}
-            <h3>Chirps</h3> {% if user.is_authenticated %} <a href="{% url 'chirper:new_post' %}">Make a new Chirp</a> {% endif %}
+            <p>Here is what people have been chirping about</p> {% if user.is_authenticated %} <a id='new-chirp' href="{% url 'chirper:new_post' %}">Make a new Chirp</a> {% endif %}
     </div>
         <div class='container mt-3'>
             <ul class='list-group'>
                 {% for post in page_obj %}
-                    <li style="background-color: #DDD0C8;" class='list-group-item mt-2'>{{post}} &raquo; posted by <a href="{% url 'chirper:profile' post.poster %}">{{post.poster}}</a> - {{post.date_added|date:'M d y, H:i'}}.
+                    <li class='list-group-item mt-2'>{{post}} <span id='post-secondary-content'> &raquo; posted by <a id='user-name' href="{% url 'chirper:profile' post.poster %}">{{post.poster}}</a> - {{post.date_added|date:'M d y, H:i'}}.
                         {% if post.poster == request.user %} |
                         <a class='link-success' href="{% url 'chirper:edit_post' post.id %}">Edit chirp</a>
                         {% endif %} |
-                        <a class='link-success' href="{% url 'chirper:reply' post.id%}">Reply</a>
+                        {% if user.is_authenticated %}
+                        <a id='reply' class='link-success' href="{% url 'chirper:reply' post.id%}">Reply</a>
+                        {% endif %}
+                    </span>
                     </li>
                 {% empty %}
                     <p>No one has chirped yet.</p>

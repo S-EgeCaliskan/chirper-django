@@ -76,14 +76,9 @@ def reply(request, post_id):
             new_reply.post_to_reply = Post.objects.get(id=post_id)
             new_reply.replier = request.user
             form.save()
-            return redirect('chirper:index')
+            return redirect('chirper:reply', post_id = post_id)
     context = {'post' : post, 'form' : form, 'replies': replies}
     return render(request, 'chirper/reply.html', context)
-    
-    
-    
-    
-    
     
     
 def profile(request, poster):
