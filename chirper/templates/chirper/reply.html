@@ -7,22 +7,22 @@
 
 <div class="container text-center mt-4">
     <div class="card" id='original-post'>
-        <p> Original Post</p>{{post}}  <i>posted by {{post.poster}}</i> on {{post.date_added}}
+        <p><b> Original Post</b></p>{{post}}  <i>posted by {{post.poster}}</i> on {{post.date_added}}
     </div>
-    <div class="row align-items-center mt-2" id="reply-list">
+    <div class="row align-items-center mt-2" id="reply-container">
         <p>Previous replies:</p>
-        <div class="col border border-dark">
+        <div class="col" id="reply-list">
         {% for reply in replies  %}
-                <span id='replies'>{{reply}} - <a href="{% url 'chirper:profile' post.poster %}"></span><i>{{reply.replier}}</i></a><br/>
+                <div id='replies'>"{{reply}}" - <a id='replier' href="{% url 'chirper:profile' post.poster %}"><i>{{reply.replier}}</i></a><br/>
+                </div>
+
             {%empty%}
             <p>No replies here!</p>
             {% endfor %}
-        </div>
     </div>
 </div>
 
 <div class='container text-center mt-5'>
-    <div class="card">
         <div class='row justify-content-md-center'>
         <div class="col-lg-4">
             <form class="body-center" action="{% url 'chirper:reply' post.id %}" method='post'>
@@ -33,6 +33,5 @@
             </div>
         </div>
     </div>
-</div>
 
 {% endblock content %}

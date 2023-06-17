@@ -42,7 +42,7 @@
 }
 
 
-li #user-name:hover, .link-success:hover {
+li #user-name:hover, .link-success:hover, #replier:hover  {
   font-weight: bold;
   font-size: 16px
 }
@@ -94,15 +94,19 @@ li #user-name:hover, .link-success:hover {
   padding-top: 20px;
 }
 
-.text-center #reply-list, .text-center #original-post{
+.text-center #reply-container, #reply-list, #original-post{
   margin: 0 auto;
   max-width: 1000px;
 }
-#reply-list{
+#reply-container{
   padding-top: 50px;
 }
 
-.col #replies{
+#replies{
   word-wrap:break-word;
-  padding-top: 5px;
+  border-bottom: 1px solid;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #F8F8F9;
+
 }

@@ -12,7 +12,8 @@
                 <li class='list-group-item mt-2'>{{post}} <span id='post-secondary-content'>&raquo; posted by <a id='user-name' href="{% url 'chirper:profile' post.poster %}">{{post.poster}}</a> - {{post.date_added|date:'M d y, H:i'}}.
                     {% if post.poster == request.user %} |
                     <a class='link-success' href="{% url 'chirper:edit_post' post.id %}">Edit chirp</a>
-                    {% endif %}
+                    {% endif %} |
+                    <a class='link-success' href="{% url 'chirper:reply' post.id %}">See replies</a>
                 </li>
             </span>
             {% empty %}
